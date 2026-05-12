@@ -10,9 +10,9 @@ require_once __DIR__ . '/phpmailer/src/PHPMailer.php';
 require_once __DIR__ . '/phpmailer/src/SMTP.php';
 
 // ── Gmail SMTP Credentials ──
-define('MAIL_FROM',     'paulitomapagmahal9@gmail.com');
+define('MAIL_FROM',     'Your_email');
 define('MAIL_FROM_NAME','E-KINDER');
-define('MAIL_PASSWORD', 'axml biqr kniu woyn');
+define('MAIL_PASSWORD', 'google_app_password');
 
 // ── Site base URL — must match your actual project folder ──
 define('SITE_URL', 'http://localhost/ITPM_PROJECT');
