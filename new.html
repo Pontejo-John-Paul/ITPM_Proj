@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UI/UX Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F4EF;
+    --ink: #1C1C1C;
+    --accent: #E8472A;
+    --muted: #9A9590;
+    --line: #E0DBD4;
+    --white: #FFFFFF;
+  }
+
+  html { background: #DEDAD4; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #DEDAD4;
+    padding: 32px 20px;
+  }
+
+  .hint {
+    text-align: center;
+    font-size: 11px;
+    color: #9A9590;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    font-family: 'Inter', monospace;
+  }
+
+  /* ── SLIDE: 16:9 landscape ── */
+  .slide {
+    width: 1024px;
+    height: 576px;
+    margin: 0 auto 40px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+    display: flex;
+  }
+
+  .slide-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #9A9590;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── SHARED SIDEBAR ── */
+  .sidebar {
+    width: 260px;
+    background: var(--ink);
+    padding: 44px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .sidebar-sm { width: 200px; }
+  .sidebar .pg {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+  }
+  .sidebar h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .sidebar h1 span { color: var(--accent); }
+  .sidebar .role {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+  .sidebar .section-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .sidebar .section-name em { color: var(--accent); font-style: normal; }
+  .sidebar .pg-bottom {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ── MAIN CONTENT AREA ── */
+  .main { flex: 1; padding: 44px 44px; display: flex; flex-direction: column; }
+
+  /* ─── SLIDE 1: COVER ─── */
+  .s1 .sidebar { justify-content: flex-end; gap: 0; }
+  .s1 .main { justify-content: center; gap: 28px; }
+
+  .bio-text {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #5A5652;
+    max-width: 420px;
+  }
+  .bio-text strong { color: var(--ink); font-weight: 500; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+  .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+  .tools-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .tool {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tool::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--line);
+    width: 100%;
+  }
+
+  .label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ─── SLIDE 2: EXPERIENCE ─── */
+  .s2 .main { justify-content: center; }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    flex: 1;
+  }
+  .exp-card {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    padding: 16px 18px;
+    background: var(--white);
+  }
+  .exp-card .e-type {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .exp-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .exp-card .period {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .exp-card p {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: #5A5652;
+  }
+
+  .roles-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .role-pill {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* ─── SLIDES 3 & 4: PROJECTS ─── */
+  .s3 .main, .s4 .main { justify-content: flex-start; }
+
+  .proj-meta {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-bottom: 18px;
+  }
+  .meta-cell {
+    padding: 12px 16px;
+    border-right: 1px solid var(--line);
+    flex: 1;
+  }
+  .meta-cell:last-child { border-right: none; }
+  .meta-cell .m-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .meta-cell .m-val {
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .mockups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    flex: 1;
+  }
+  .mock {
+    background: #EDE8E1;
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .mock-topbar {
+    height: 22px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .mdot { width: 5px; height: 5px; border-radius: 50%; }
+  .mock-inner {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--white);
+  }
+  .ml { height: 6px; background: var(--line); border-radius: 1px; }
+  .ml.s { width: 55%; }
+  .ml.m { width: 75%; }
+  .ml.f { width: 100%; }
+  .mb { height: 36px; background: var(--line); border-radius: 1px; }
+  .mb.a { background: rgba(232,71,42,0.12); }
+  .mock-cap {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 6px 0;
+    background: #EDE8E1;
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  /* dark project variant */
+  .s4 { background: #1C1C1C; }
+  .s4 .main { background: #1C1C1C; }
+  .s4 .proj-meta { border-color: rgba(255,255,255,0.08); }
+  .s4 .meta-cell { border-color: rgba(255,255,255,0.08); }
+  .s4 .m-label { color: rgba(255,255,255,0.3); }
+  .s4 .m-val { color: rgba(255,255,255,0.8); }
+  .s4 .mock { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.07); }
+  .s4 .mock-inner { background: rgba(255,255,255,0.03); }
+  .s4 .ml { background: rgba(255,255,255,0.08); }
+  .s4 .mb { background: rgba(255,255,255,0.06); }
+  .s4 .mb.a { background: rgba(232,71,42,0.2); }
+  .s4 .mock-cap { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.25); }
+  .s4 .label { color: rgba(255,255,255,0.3); }
+
+  /* ─── SLIDE 5: PROCESS ─── */
+  .s5 .main { justify-content: center; }
+  .process-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .p-step {
+    border: 1px solid var(--line);
+    padding: 18px 16px;
+    background: var(--white);
+    position: relative;
+  }
+  .p-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 13px;
+    background: var(--bg);
+    z-index: 2;
+    line-height: 1;
+  }
+  .p-step:last-child::after { display: none; }
+  .p-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--line);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .p-name {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .p-desc {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #5A5652;
+  }
+
+  .process-detail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .pd-card {
+    background: var(--ink);
+    padding: 14px 14px;
+  }
+  .pd-card .pd-title {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .pd-card ul {
+    padding-left: 14px;
+  }
+  .pd-card li {
+    font-size: 11px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2px;
+  }
+
+  /* ─── SLIDE 6: SERVICES + CONTACT ─── */
+  .s6 .main { justify-content: flex-start; gap: 20px; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .svc {
+    border: 1px solid var(--line);
+    padding: 14px 16px;
+    background: var(--white);
+  }
+  .svc .svc-icon { font-size: 18px; margin-bottom: 6px; }
+  .svc .svc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .svc .svc-desc {
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .svc.featured { border-top: 2px solid var(--accent); }
+
+  .contact-row {
+    display: flex;
+    gap: 10px;
+  }
+  .c-item {
+    flex: 1;
+    border: 1px solid var(--line);
+    padding: 12px 16px;
+    background: var(--white);
+  }
+  .c-item .c-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .c-item .c-val {
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .slide { box-shadow: none; page-break-after: always; }
+    .hint, .slide-label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<p class="hint">Ctrl+P / Cmd+P → Save as PDF &nbsp;|&nbsp; Set layout to Landscape, No margins, Enable background graphics</p>
+
+<!-- ══ SLIDE 1: COVER ══ -->
+<div class="slide-label">01 / 06 — Introduction</div>
+<div class="slide s1">
+  <div class="sidebar">
+    <div class="pg">UI/UX Portfolio</div>
+    <div>
+      <h1>Your<br/><span>Name</span></h1>
+      <div class="role">UI/UX Designer</div>
+    </div>
+    <div class="pg-bottom">01 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="label">About Me</div>
+    <p class="bio-text">
+      Hi, I'm <strong>[Your Name]</strong> — a UI/UX Designer focused on creating simple, 
+      user-centered digital experiences. I enjoy turning complex problems into 
+      clean, intuitive interfaces.
+    </p>
+
+    <div class="divider"></div>
+
+    <div>
+      <div class="label">Skills</div>
+      <div class="tags">
+        <span class="tag accent">UI Design</span>
+        <span class="tag">UX Research</span>
+        <span class="tag">Wireframing</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">User Testing</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="label">Tools</div>
+      <div class="tools-row">
+        <span class="tool">Figma</span>
+        <span class="tool">Adobe XD</span>
+        <span class="tool">Canva</span>
+        <span class="tool">Miro</span>
+        <span class="tool">Photoshop</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 2: EXPERIENCE ══ -->
+<div class="slide-label">02 / 06 — Design Experience</div>
+<div class="slide s2">
+  <div class="sidebar">
+    <div class="pg">Experience</div>
+    <div class="section-name">Design<br/><em>Experience</em></div>
+    <div class="pg-bottom">02 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="e-type">Academic Project</div>
+        <h3>Project / Course Title</h3>
+        <div class="period">Year · School Name</div>
+        <p>Brief description of what you designed and your role in the project.</p>
+      </div>
+      <div class="exp-card">
+        <div class="e-type">Internship / Freelance</div>
+        <h3>Company or Client Name</h3>
+        <div class="period">Month Year – Month Year</div>
+        <p>Describe your design responsibilities and tools used briefly.</p>
+      </div>
+      <div class="exp-card">
+        <div class="e-type">Personal Project</div>
+        <h3>Side Project Title</h3>
+        <div class="period">Year · Self-initiated</div>
+        <p>What problem you solved and how you approached the design.</p>
+      </div>
+      <div class="exp-card">
+        <div class="e-type">Training / Workshop</div>
+        <h3>Course or Certification</h3>
+        <div class="period">Year · Platform</div>
+        <p>Key skills or methods learned from this training.</p>
+      </div>
+    </div>
+
+    <div class="roles-row">
+      <div class="role-pill">Wireframing</div>
+      <div class="role-pill">Prototyping</div>
+      <div class="role-pill">UI Design</div>
+      <div class="role-pill">User Research</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 3: PROJECT 1 ══ -->
+<div class="slide-label">03 / 06 — Project Showcase #1</div>
+<div class="slide s3">
+  <div class="sidebar sidebar-sm">
+    <div class="pg">Project 01 / 02</div>
+    <div class="section-name">Project<br/><em>Title</em><br/>Here</div>
+    <div>
+      <div style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Type</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.6);">Mobile App</div>
+    </div>
+    <div class="pg-bottom">03 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="proj-meta">
+      <div class="meta-cell">
+        <div class="m-label">Problem</div>
+        <div class="m-val">Users struggle to [describe the pain point].</div>
+      </div>
+      <div class="meta-cell">
+        <div class="m-label">Target Users</div>
+        <div class="m-val">Young adults who [describe behavior].</div>
+      </div>
+      <div class="meta-cell">
+        <div class="m-label">Solution</div>
+        <div class="m-val">A mobile app that [core feature].</div>
+      </div>
+    </div>
+
+    <div class="label">UI Screens — Replace with your actual Figma screenshots</div>
+    <div class="mockups">
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:#FF5F57;"></div>
+          <div class="mdot" style="background:#FEBC2E;"></div>
+          <div class="mdot" style="background:#28C840;"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="ml s"></div>
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+          <div class="ml m"></div>
+          <div class="mb"></div>
+        </div>
+        <div class="mock-cap">Onboarding</div>
+      </div>
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:#FF5F57;"></div>
+          <div class="mdot" style="background:#FEBC2E;"></div>
+          <div class="mdot" style="background:#28C840;"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="ml m"></div>
+          <div class="mb"></div>
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+        </div>
+        <div class="mock-cap">Home Screen</div>
+      </div>
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:#FF5F57;"></div>
+          <div class="mdot" style="background:#FEBC2E;"></div>
+          <div class="mdot" style="background:#28C840;"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+          <div class="ml s"></div>
+          <div class="mb"></div>
+          <div class="ml m"></div>
+        </div>
+        <div class="mock-cap">Detail View</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 4: PROJECT 2 ══ -->
+<div class="slide-label">04 / 06 — Project Showcase #2</div>
+<div class="slide s4">
+  <div class="sidebar sidebar-sm" style="background:#111;">
+    <div class="pg">Project 02 / 02</div>
+    <div class="section-name">Second<br/><em>Project</em><br/>Title</div>
+    <div>
+      <div style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Type</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5);">Web / Dashboard</div>
+    </div>
+    <div class="pg-bottom">04 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="proj-meta">
+      <div class="meta-cell">
+        <div class="m-label">Problem</div>
+        <div class="m-val">Existing tools fail to [describe the problem].</div>
+      </div>
+      <div class="meta-cell">
+        <div class="m-label">Target Users</div>
+        <div class="m-val">Students who [describe their challenge].</div>
+      </div>
+      <div class="meta-cell">
+        <div class="m-label">Solution</div>
+        <div class="m-val">A dashboard that [core function].</div>
+      </div>
+    </div>
+
+    <div class="label">UI Screens — Replace with your actual Figma screenshots</div>
+    <div class="mockups">
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="ml s"></div>
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+          <div class="mb"></div>
+        </div>
+        <div class="mock-cap">Login</div>
+      </div>
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+          <div class="mb"></div>
+          <div class="ml s"></div>
+        </div>
+        <div class="mock-cap">Dashboard</div>
+      </div>
+      <div class="mock">
+        <div class="mock-topbar">
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+          <div class="mdot" style="background:rgba(255,255,255,0.15);"></div>
+        </div>
+        <div class="mock-inner">
+          <div class="ml m"></div>
+          <div class="mb"></div>
+          <div class="mb a"></div>
+          <div class="ml f"></div>
+        </div>
+        <div class="mock-cap">Detail</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 5: DESIGN PROCESS ══ -->
+<div class="slide-label">05 / 06 — Design Process</div>
+<div class="slide s5">
+  <div class="sidebar">
+    <div class="pg">Methodology</div>
+    <div class="section-name">Design<br/><em>Process</em></div>
+    <div class="pg-bottom">05 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="process-row">
+      <div class="p-step">
+        <div class="p-num">01</div>
+        <div class="p-name">User Problem</div>
+        <p class="p-desc">Research and identify real pain points through interviews and observation.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">02</div>
+        <div class="p-name">Ideation</div>
+        <p class="p-desc">Brainstorm and sketch multiple solutions. Evaluate against user needs.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">03</div>
+        <div class="p-name">Wireframe</div>
+        <p class="p-desc">Build low-fidelity layouts to map structure and user flows.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">04</div>
+        <div class="p-name">Final Interface</div>
+        <p class="p-desc">Apply high-fidelity UI and test with real users. Iterate.</p>
+      </div>
+    </div>
+
+    <div class="process-detail">
+      <div class="pd-card">
+        <div class="pd-title">Research</div>
+        <ul>
+          <li>User interviews</li>
+          <li>Surveys</li>
+          <li>Competitor analysis</li>
+          <li>User personas</li>
+        </ul>
+      </div>
+      <div class="pd-card">
+        <div class="pd-title">Ideation</div>
+        <ul>
+          <li>Sketching</li>
+          <li>Mind mapping</li>
+          <li>Feature prioritization</li>
+          <li>User story mapping</li>
+        </ul>
+      </div>
+      <div class="pd-card">
+        <div class="pd-title">Wireframing</div>
+        <ul>
+          <li>Lo-fi sketches</li>
+          <li>User flow diagrams</li>
+          <li>Content hierarchy</li>
+          <li>Early feedback</li>
+        </ul>
+      </div>
+      <div class="pd-card">
+        <div class="pd-title">Final UI & Testing</div>
+        <ul>
+          <li>Hi-fi design</li>
+          <li>Design system</li>
+          <li>Usability testing</li>
+          <li>Iteration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 6: SERVICES + CONTACT ══ -->
+<div class="slide-label">06 / 06 — Services & Contact</div>
+<div class="slide s6">
+  <div class="sidebar">
+    <div class="pg">What I Offer</div>
+    <div class="section-name">Services<br/>&amp;<br/><em>Contact</em></div>
+    <div class="pg-bottom">06 — 06</div>
+  </div>
+
+  <div class="main">
+    <div class="services-grid">
+      <div class="svc featured">
+        <div class="svc-icon">🎨</div>
+        <div class="svc-name">UI Design</div>
+        <p class="svc-desc">High-fidelity screens, components, and design systems.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">🔍</div>
+        <div class="svc-name">UX Research</div>
+        <p class="svc-desc">User interviews, surveys, and usability testing.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">📐</div>
+        <div class="svc-name">Wireframing</div>
+        <p class="svc-desc">Lo-fi layouts and user flow diagrams.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-name">Prototyping</div>
+        <p class="svc-desc">Interactive Figma prototypes for testing and presentations.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">🖥️</div>
+        <div class="svc-name">Web & Mobile Design</div>
+        <p class="svc-desc">Responsive layouts for desktop and mobile platforms.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">✦</div>
+        <div class="svc-name">Branding</div>
+        <p class="svc-desc">Visual identity, color palettes, and typography systems.</p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="c-item">
+        <div class="c-label">Email</div>
+        <div class="c-val">yourname@email.com</div>
+      </div>
+      <div class="c-item">
+        <div class="c-label">LinkedIn</div>
+        <div class="c-val">linkedin.com/in/yourname</div>
+      </div>
+      <div class="c-item">
+        <div class="c-label">Portfolio</div>
+        <div class="c-val">yourportfolio.com</div>
+      </div>
+      <div class="c-item">
+        <div class="c-label">Contact No.</div>
+        <div class="c-val">+63 9XX XXX XXXX</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
